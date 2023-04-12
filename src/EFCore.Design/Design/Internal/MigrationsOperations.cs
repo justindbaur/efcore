@@ -66,7 +66,8 @@ public class MigrationsOperations
         string name,
         string? outputDir,
         string? contextType,
-        string? @namespace)
+        string? @namespace,
+        bool failOnEmpty)
     {
         if (outputDir != null)
         {
@@ -92,8 +93,8 @@ public class MigrationsOperations
         var migration =
             string.IsNullOrEmpty(@namespace)
                 // TODO: Honor _nullable (issue #18950)
-                ? scaffolder.ScaffoldMigration(name, _rootNamespace ?? string.Empty, subNamespace, _language)
-                : scaffolder.ScaffoldMigration(name, null, @namespace, _language);
+                ? scaffolder.ScaffoldMigration(name, _rootNamespace ?? string.Empty, subNamespace, _language, failOnEmpty)
+                : scaffolder.ScaffoldMigration(name, null, @namespace, _language, failOnEmpty);
         return scaffolder.Save(_projectDir, migration, outputDir);
     }
 

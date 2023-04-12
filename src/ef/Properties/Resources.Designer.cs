@@ -318,6 +318,12 @@ namespace Microsoft.EntityFrameworkCore.Tools.Properties
             => GetString("MigrationsDescription");
 
         /// <summary>
+        ///     Fail if the added migration has no changes.
+        /// </summary>
+        public static string MigrationsFailOnEmptyDescription
+            => GetString("MigrationsFailOnEmptyDescription");
+
+        /// <summary>
         ///     Lists available migrations.
         /// </summary>
         public static string MigrationsListDescription
@@ -647,3 +653,4 @@ namespace Microsoft.EntityFrameworkCore.Tools.Properties
         }
     }
 }
+

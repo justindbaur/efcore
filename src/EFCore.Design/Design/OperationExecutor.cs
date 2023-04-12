@@ -164,8 +164,9 @@ public class OperationExecutor : MarshalByRefObject
             var outputDir = (string?)args["outputDir"];
             var contextType = (string?)args["contextType"];
             var @namespace = (string?)args["namespace"];
+            var failOnEmpty = (bool)(args["failOnEmpty"] ?? false);
 
-            Execute(() => executor.AddMigrationImpl(name, outputDir, contextType, @namespace));
+            Execute(() => executor.AddMigrationImpl(name, outputDir, contextType, @namespace, failOnEmpty));
         }
     }
 
@@ -173,7 +174,8 @@ public class OperationExecutor : MarshalByRefObject
         string name,
         string? outputDir,
         string? contextType,
-        string? @namespace)
+        string? @namespace,
+        bool failOnEmpty)
     {
         Check.NotEmpty(name, nameof(name));
 
@@ -181,7 +183,8 @@ public class OperationExecutor : MarshalByRefObject
             name,
             outputDir,
             contextType,
-            @namespace);
+            @namespace,
+            failOnEmpty);
 
         return new Hashtable
         {

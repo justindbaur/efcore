@@ -46,7 +46,7 @@ public class MigrationsScaffolder : IMigrationsScaffolder
         string migrationName,
         string? rootNamespace,
         string? subNamespace)
-        => ScaffoldMigration(migrationName, rootNamespace, subNamespace, language: null);
+        => ScaffoldMigration(migrationName, rootNamespace, subNamespace, language: null, failOnEmpty: false);
 
     /// <summary>
     ///     Scaffolds a new migration.
@@ -61,12 +61,14 @@ public class MigrationsScaffolder : IMigrationsScaffolder
     ///     the sub-namespace should not both be empty.
     /// </param>
     /// <param name="language">The project's language.</param>
+    /// <param name="failOnEmpty">Whether or not to fail on an empty migration.</param>
     /// <returns>The scaffolded migration.</returns>
     public virtual ScaffoldedMigration ScaffoldMigration(
         string migrationName,
         string? rootNamespace,
         string? subNamespace = null,
-        string? language = null)
+        string? language = null,
+        bool failOnEmpty = false)
     {
         if (string.Equals(migrationName, "migration", StringComparison.OrdinalIgnoreCase))
         {
@@ -144,6 +146,11 @@ public class MigrationsScaffolder : IMigrationsScaffolder
         var lastModel = Dependencies.SnapshotModelProcessor.Process(modelSnapshot?.Model)?.GetRelationalModel();
         var upOperations = Dependencies.MigrationsModelDiffer
             .GetDifferences(lastModel, Dependencies.Model.GetRelationalModel());
+        if (failOnEmpty && upOperations.Count == 0)
+        {
+            throw new OperationException(DesignStrings.EmptyMigration);
+        }
+
         var downOperations = upOperations.Count > 0
             ? Dependencies.MigrationsModelDiffer.GetDifferences(Dependencies.Model.GetRelationalModel(), lastModel)
             : new List<MigrationOperation>();

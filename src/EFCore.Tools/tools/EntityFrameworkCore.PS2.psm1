@@ -28,6 +28,9 @@ $versionErrorMessage = 'The Entity Framework Core Package Manager Console Tools 
 .PARAMETER Namespace
     The namespace to use. Matches the directory by default.
 
+.PARAMETER FailOnEmpty
+    Fail if the added migration has no changes.
+
 .PARAMETER Args
     Arguments passed to the application.
 
@@ -43,6 +46,7 @@ function Add-Migration(
     $Project,
     $StartupProject,
     $Namespace,
+    $FailOnEmpty,
     $Args)
 {
     WarnIfEF6 'Add-Migration'

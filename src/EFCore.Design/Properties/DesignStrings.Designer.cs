@@ -224,6 +224,12 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 migrationName);
 
         /// <summary>
+        ///     The migration being added was empty.
+        /// </summary>
+        public static string EmptyMigration
+            => GetString("EmptyMigration");
+
+        /// <summary>
         ///     The encoding '{encoding}' specified in the output directive will be ignored. EF Core always scaffolds files using the encoding 'utf-8'.
         /// </summary>
         public static string EncodingIgnored(object? encoding)
@@ -829,3 +835,4 @@ namespace Microsoft.EntityFrameworkCore.Internal
         }
     }
 }
+

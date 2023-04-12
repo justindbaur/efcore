@@ -50,6 +50,14 @@ public class MigrationsScaffolderTest
         Assert.Equal("OverrideNamespace.OverrideSubNamespace", migration.SnapshotSubnamespace);
     }
 
+    [ConditionalFact]
+    public void ScaffoldMigration_fails_when_empty()
+    {
+        var scaffolder = CreateMigrationScaffolder<ContextWithSnapshot>();
+
+        Assert.Throws<OperationException>(() => scaffolder.ScaffoldMigration("EmptyMigration", null, failOnEmpty: true));
+    }
+
     private IMigrationsScaffolder CreateMigrationScaffolder<TContext>()
         where TContext : DbContext, new()
     {

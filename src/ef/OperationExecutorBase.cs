@@ -91,7 +91,7 @@ internal abstract class OperationExecutorBase : IOperationExecutor
         return resultHandler.Result;
     }
 
-    public IDictionary AddMigration(string name, string? outputDir, string? contextType, string? @namespace)
+    public IDictionary AddMigration(string name, string? outputDir, string? contextType, string? @namespace, bool failOnEmpty)
         => InvokeOperation<IDictionary>(
             "AddMigration",
             new Dictionary<string, object?>
@@ -99,7 +99,8 @@ internal abstract class OperationExecutorBase : IOperationExecutor
                 ["name"] = name,
                 ["outputDir"] = outputDir,
                 ["contextType"] = contextType,
-                ["namespace"] = @namespace
+                ["namespace"] = @namespace,
+                ["failOnEmpty"] = failOnEmpty
             });
 
     public IDictionary RemoveMigration(string? contextType, bool force)

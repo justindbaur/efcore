@@ -12,6 +12,7 @@ internal partial class MigrationsAddCommand : ContextCommandBase
     private CommandOption? _outputDir;
     private CommandOption? _json;
     private CommandOption? _namespace;
+    private CommandOption? _failOnEmpty;
 
     public override void Configure(CommandLineApplication command)
     {
@@ -22,6 +23,7 @@ internal partial class MigrationsAddCommand : ContextCommandBase
         _outputDir = command.Option("-o|--output-dir <PATH>", Resources.MigrationsOutputDirDescription);
         _json = Json.ConfigureOption(command);
         _namespace = command.Option("-n|--namespace <NAMESPACE>", Resources.MigrationsNamespaceDescription);
+        _failOnEmpty = command.Option("--fail-on-empty", Resources.MigrationsFailOnEmptyDescription);
 
         base.Configure(command);
     }

@@ -36,6 +36,9 @@ Register-TabExpansion Add-Migration @{
 .PARAMETER Namespace
     The namespace to use. Matches the directory by default.
 
+.PARAMETER FailOnEmpty
+    Fail if the added migration has no changes.
+
 .PARAMETER Args
     Arguments passed to the application.
 
@@ -55,6 +58,7 @@ function Add-Migration
         [string] $Project,
         [string] $StartupProject,
         [string] $Namespace,
+        [switch] $FailOnEmpty,
         [string] $Args)
 
     WarnIfEF6 'Add-Migration'
@@ -72,6 +76,11 @@ function Add-Migration
     if ($Namespace)
     {
         $params += '--namespace', $Namespace
+    }
+
+    if ($FailOnEmpty)
+    {
+        $params += '--fail-on-empty'
     }
 
     $params += GetParams $Context

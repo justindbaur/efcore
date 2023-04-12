@@ -228,6 +228,9 @@
   <data name="MigrationsDescription" xml:space="preserve">
     <value>Commands to manage migrations.</value>
   </data>
+  <data name="MigrationsFailOnEmptyDescription" xml:space="preserve">
+    <value>Fail if the added migration has no changes.</value>
+  </data>
   <data name="MigrationsListDescription" xml:space="preserve">
     <value>Lists available migrations.</value>
   </data>

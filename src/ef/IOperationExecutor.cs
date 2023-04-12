@@ -9,7 +9,7 @@ namespace Microsoft.EntityFrameworkCore.Tools;
 
 internal interface IOperationExecutor : IDisposable
 {
-    IDictionary AddMigration(string name, string? outputDir, string? contextType, string? @namespace);
+    IDictionary AddMigration(string name, string? outputDir, string? contextType, string? @namespace, bool failOnEmpty);
     IDictionary RemoveMigration(string? contextType, bool force);
     IEnumerable<IDictionary> GetMigrations(string? contextType, string? connectionString, bool noConnect);
     void DropDatabase(string? contextType);

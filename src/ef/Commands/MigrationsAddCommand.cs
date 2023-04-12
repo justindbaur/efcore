@@ -22,7 +22,7 @@ internal partial class MigrationsAddCommand
     protected override int Execute(string[] args)
     {
         using var executor = CreateExecutor(args);
-        var files = executor.AddMigration(_name!.Value!, _outputDir!.Value(), Context!.Value(), _namespace!.Value());
+        var files = executor.AddMigration(_name!.Value!, _outputDir!.Value(), Context!.Value(), _namespace!.Value(), _failOnEmpty!.HasValue());
 
         if (_json!.HasValue())
         {

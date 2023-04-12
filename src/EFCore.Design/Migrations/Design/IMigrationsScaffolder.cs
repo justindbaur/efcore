@@ -19,12 +19,14 @@ public interface IMigrationsScaffolder
     /// <param name="rootNamespace">The project's root namespace.</param>
     /// <param name="subNamespace">The migration's sub-namespace.</param>
     /// <param name="language">The project's language.</param>
+    /// <param name="failOnEmpty">Fail if there are no operations to make.</param>
     /// <returns>The scaffolded migration.</returns>
     ScaffoldedMigration ScaffoldMigration(
         string migrationName,
         string? rootNamespace,
         string? subNamespace = null,
-        string? language = null);
+        string? language = null,
+        bool failOnEmpty = false);
 
     /// <summary>
     ///     Removes the previous migration.
